@@ -1,5 +1,7 @@
 # Analytics For Cloudflare
 
+![logo](https://raw.githubusercontent.com/ChuckMac/analytics-for-cloudflare/assets/banner-772x250.jpg)
+
 This is a WordPress plugin to connect your WordPress dashboard to your CloudFlare account to display some key analytics data.
 
 The dashboard widget provides a quick look at some key metrics for your site.
@@ -32,3 +34,7 @@ You can also get a quick look at some other metics available.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Enter your CloudFlare API credentials in the 'Settings' -> 'Analytics For Cloudflare' screen
 4. Once connected, select the domain to display the statics for on the same settings page.
+
+## Screenshots
+
+![Screenshot 1](https://raw.githubusercontent.com/ChuckMac/analytics-for-cloudflare/assets/screenshot-1.png)
