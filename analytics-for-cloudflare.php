@@ -3,7 +3,7 @@
  * Plugin Name:       Analytics For Cloudflare
  * Plugin URI:        https://chuckmacdev.com
  * Description:       Access Cloudflare analytics information right from your WordPress dashboard.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            ChuckMac Development
  * Author URI:        https://chuckmacdev.com
  * License:           GPL-2.0

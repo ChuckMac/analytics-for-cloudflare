@@ -48,5 +48,14 @@ You can also get a quick look at some other metics available.
 
 == Changelog ==
 
+= 1.0.1 =
+* Internationalization not enabled.
+* Link to settings from the plugin page.
+
 = 1.0 =
 * The initial release of the plugin.
+
+== Upgrade Notice ==
+
+= 1.0.1 =
+Internationalization fix and other minor updates.
