@@ -41,7 +41,7 @@ class CMD_Analytics_For_Cloudflare {
 	 */
 	public function __construct() {
 
-		//$this->set_locale();
+		$this->set_locale();
 
 		add_action( 'init', array( $this, 'init' ), 10 );
 
