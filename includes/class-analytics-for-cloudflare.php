@@ -30,6 +30,9 @@ class CMD_Analytics_For_Cloudflare {
 	/** plugin text domain */
 	const TEXT_DOMAIN = 'cmd-analytics-for-cloudflare';
 
+	/** plugin base file */
+	public static $BASEFILE;
+
 	/**
 	 * Define the core functionality of the plugin.
 	 *
@@ -120,5 +123,17 @@ class CMD_Analytics_For_Cloudflare {
 		}
 		
 		return $template_content;
+	}
+
+
+
+	/**
+	 * Set the base filename of the plugin.
+	 *
+	 * @since    1.0.1
+	 * @access   public
+	 */
+	public function set_base_file( $basefile ) {
+		self::$BASEFILE = $basefile;
 	}
 }

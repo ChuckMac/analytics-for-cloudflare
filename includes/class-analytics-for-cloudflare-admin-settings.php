@@ -50,6 +50,8 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 		add_action( 'admin_init', array( $this, 'settings_init' ) );
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 
+		add_filter( 'plugin_action_links_' . plugin_basename( CMD_Analytics_For_Cloudflare::$BASEFILE ), array( &$this, 'plugin_settings_link' ), 10, 4 );
+
 	}
 
 	/**
@@ -319,5 +321,27 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 		return $settings;
 
 	}
+
+	/**
+	 * Add action links to the plugin page
+	 *
+	 * @since     1.0.1
+	 * @param     array    $actions      associative array of action names to anchor tags
+	 * @param     string   $plugin_file  plugin file name, ie my-plugin/my-plugin.php
+	 * @param     array    $plugin_data  associative array of plugin data from the plugin file headers
+	 * @param     string   $context      plugin status context, ie 'all', 'active', 'inactive', 'recently_active'
+	 * 
+	 * @return    array    $settings     Sanitized form data.
+	 */
+	public function plugin_settings_link( $actions, $plugin_file, $plugin_data, $context ) {
+
+		return array_merge( array( 'settings' => 
+								'<a href="' . esc_url( get_admin_url( null, 'options-general.php?page=' . CMD_Analytics_For_Cloudflare::PLUGIN_ID ) ) . '">' .
+								__( 'Settings', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) . 
+								'</a>' ),
+                            $actions );
+
+	}
+
 
 }

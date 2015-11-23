@@ -35,6 +35,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-analytics-for-cloudflare.p
 function run_cmd_analytics_for_cloudflare() {
 
 	$plugin = new CMD_Analytics_For_Cloudflare();
+	$plugin->set_base_file(__FILE__);
 
 }
 run_cmd_analytics_for_cloudflare();
