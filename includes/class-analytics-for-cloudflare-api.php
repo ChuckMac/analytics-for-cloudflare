@@ -41,10 +41,10 @@ class CMD_Analytics_For_Cloudflare_Api {
 
 		$options = get_option( CMD_Analytics_For_Cloudflare::PLUGIN_ID . "_settings" );
 
-		$this->api_key   = ( isset( $options['api_key'] ) ? $options['api_key'] : null );
-		$this->api_email = ( isset( $options['api_email'] ) ? $options['api_email'] : null );
-		$this->zone_id   = ( isset( $options['domain'] ) ? $options['domain'] : null );
-
+		$this->api_key   = apply_filters( 'cmd_analytics_for_cloudflare_set_api_key', ( isset( $options['api_key'] ) ? $options['api_key'] : null ) );
+		$this->api_email = apply_filters( 'cmd_analytics_for_cloudflare_set_api_email', ( isset( $options['api_email'] ) ? $options['api_email'] : null ) );
+		$this->zone_id   = apply_filters( 'cmd_analytics_for_cloudflare_set_api_domain', ( isset( $options['domain'] ) ? $options['domain'] : null ) );
+ 
 	}
 
 

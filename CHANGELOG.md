@@ -1,5 +1,9 @@
 # Analytics For Cloudflare
 
+## 1.0.2 - 2015-11-26
+### Added
+ - Developer hooks to filter api values
+
 ## 1.0.1 - 2015-11-23
 ### Added
  - Link to settings from the plugin page
