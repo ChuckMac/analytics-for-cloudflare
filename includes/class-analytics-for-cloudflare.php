@@ -110,7 +110,7 @@ class CMD_Analytics_For_Cloudflare {
 			extract( $variables );
 			ob_start();
 
-			if ( 'always' == $require ) {
+			if ( 'always' === $require ) {
 				require( $template_path );
 			} else {
 				require_once( $template_path );

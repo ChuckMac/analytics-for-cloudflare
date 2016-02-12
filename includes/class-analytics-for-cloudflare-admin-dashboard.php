@@ -55,7 +55,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 	 */
 	public function enqueue_dashboard_scripts_styles( $hook ) {
 
-		if ( 'index.php' == $hook ) {
+		if ( 'index.php' === $hook ) {
 			wp_enqueue_style( CMD_Analytics_For_Cloudflare::TEXT_DOMAIN . '-css', plugins_url( 'assets/css/admin.css' , dirname( __FILE__ ) ) );
 			wp_enqueue_script( CMD_Analytics_For_Cloudflare::TEXT_DOMAIN . '-moment-js-lib', plugins_url( 'lib/Moment.js-2.10.6/moment.js' , dirname( __FILE__ ) ), array( 'jquery' ) );
 			wp_enqueue_script( CMD_Analytics_For_Cloudflare::TEXT_DOMAIN . '-charts-js-lib', plugins_url( 'lib/Chart.js-1.0.2/Chart.min.js' , dirname( __FILE__ ) ), array( 'jquery', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN . '-moment-js-lib' ) );
@@ -111,7 +111,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 		$cache_time = ( isset( $this->plugin_options['cache_time'] ) ? $this->plugin_options['cache_time'] : '900' );
 
 		//Check our transiant for the analytics object for our current view, if not found then pull the data
-		if ( 0 == $cache_time || false === ( $analytics = get_transient( 'cmd_afc_results_' . $current_time . '_' . $current_type ) ) ) {
+		if ( 0 === $cache_time || false === ( $analytics = get_transient( 'cmd_afc_results_' . $current_time . '_' . $current_type ) ) ) {
 
 			require_once( 'class-analytics-for-cloudflare-api.php' );
 			$cloudflare = new CMD_Analytics_For_Cloudflare_Api();
@@ -119,9 +119,9 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 
 			//If we encounter an error, show it and don't cache
 			if ( is_wp_error( $analytics ) ) {
-				echo '<h3 class=>' . __( 'Unable to connect to CloudFlare', 'cmd-analytics-for-cloudflare' ) . '</h3>';
-				echo '<p>' . $analytics->get_error_message(); '</p>';
-				echo '<p>' . __( sprintf( 'View the %sCloudFlare For Analytics settings%s', '<a href="' . admin_url( 'options-general.php?page=cmd_analytics_for_cloudflare' ) . '">', '</a>' ), 'cmd-analytics-for-cloudflare' ) . '</p>';
+				echo '<h3 class=>' . esc_html__( 'Unable to connect to CloudFlare', 'cmd-analytics-for-cloudflare' ) . '</h3>';
+				echo '<p>' . esc_html( $analytics->get_error_message() ) . '</p>';
+				echo '<p>' . esc_html__( sprintf( 'View the %sCloudFlare For Analytics settings%s', '<a href="' . admin_url( 'options-general.php?page=cmd_analytics_for_cloudflare' ) . '">', '</a>' ), 'cmd-analytics-for-cloudflare' ) . '</p>';
 				return;
 			}
 
@@ -136,7 +136,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 		do_action( 'cmd_analytics_for_cloudflare_before_dashboard' );
 
 		// Render the display from the dashboard template file
-		echo CMD_Analytics_For_Cloudflare::render_template( 'admin/cmd-afc-dashboard-widget.php',
+		echo esc_html( CMD_Analytics_For_Cloudflare::render_template( 'admin/cmd-afc-dashboard-widget.php',
 			array(
 				'time_options'    => $time_options,
 				'current_time'    => $current_time,
@@ -144,7 +144,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 				'current_type'    => $current_type,
 				'analytics'       => $analytics,
 			)
-		);
+		) );
 
 		do_action( 'cmd_analytics_for_cloudflare_after_dashboard' );
 	}
@@ -227,7 +227,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 
 		// Configuration for the main line chart
 		$interval_chart = array();
-		if ( ( 'requests' == $current_type ) || ( 'bandwidth' == $current_type )  ) {
+		if ( ( 'requests' === $current_type ) || ( 'bandwidth' === $current_type )  ) {
 			$interval_chart['datasets'][0] = array(
 				'label' => $display_options[ $current_type ],
 				'color' => 'rgba(76,255,0,0.2)',
@@ -275,13 +275,13 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 		foreach ( $analytics->timeseries as $interval ) {
 
 			// Set the date format for the chart (hours or dates)
-			if ( '-1440' == $current_time ) {
+			if ( '-1440' === $current_time ) {
 				$interval_chart['labels'][] = apply_filters( 'cmd_analytics_for_cloudflare_interval_dateformat', date( 'ga', strtotime( $interval->since ) ), $interval->since, $current_time );
 			} else {
 				$interval_chart['labels'][] = apply_filters( 'cmd_analytics_for_cloudflare_interval_dateformat', date( 'm/d', strtotime( $interval->since ) ), $interval->since, $current_time );
 			}
 
-			if ( ( 'requests' == $current_type ) || ( 'bandwidth' == $current_type ) ) {
+			if ( ( 'requests' === $current_type ) || ( 'bandwidth' === $current_type ) ) {
 				$interval_chart['datasets'][0]['data'][] = $interval->$current_type->all;
 				$interval_chart['datasets'][1]['data'][] = $interval->$current_type->cached;
 				$interval_chart['datasets'][2]['data'][] = $interval->$current_type->uncached;

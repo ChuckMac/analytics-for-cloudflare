@@ -84,7 +84,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 	public function settings_init() {
 
 		global $pagenow;
-		if ( ( 'options-general.php' == $pagenow ) && ( CMD_Analytics_For_Cloudflare::PLUGIN_ID == $_GET['page'] ) ) {
+		if ( ( 'options-general.php' === $pagenow ) && ( CMD_Analytics_For_Cloudflare::PLUGIN_ID === $_GET['page'] ) ) {
 			$this->setup_options_page();
 		}
 
@@ -147,8 +147,8 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 		$value = ( isset( $this->plugin_options['api_key'] ) ? $this->plugin_options['api_key'] : '' );
 
 		?>
-		<input type='text' size="50" maxlength="48" name='<?php echo $this->settings_options; ?>[api_key]' value='<?php echo $value; ?>'>
-		(<a href="https://www.cloudflare.com/my-websites"><?php _e( 'Get This?', 'cmd-analytics-for-cloudflare' ); ?></a>)
+		<input type='text' size="50" maxlength="48" name='<?php echo esc_attr( $this->settings_options ); ?>[api_key]' value='<?php echo esc_attr( $value ); ?>'>
+		(<a href="https://www.cloudflare.com/my-websites"><?php esc_html_e( 'Get This?', 'cmd-analytics-for-cloudflare' ); ?></a>)
 		<?php
 
 	}
@@ -163,8 +163,8 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 		$value = ( isset( $this->plugin_options['api_email'] ) ? $this->plugin_options['api_email'] : '' );
 
 		?>
-		<input type='text' size="50" maxlength="100" name='<?php echo $this->settings_options; ?>[api_email]' value='<?php echo $value; ?>'>
-		(<a href="https://www.cloudflare.com/my-account.html"><?php _e( 'Get This?', 'cmd-analytics-for-cloudflare' ); ?></a>)
+		<input type='text' size="50" maxlength="100" name='<?php echo esc_attr( $this->settings_options ); ?>[api_email]' value='<?php echo esc_attr( $value ); ?>'>
+		(<a href="https://www.cloudflare.com/my-account.html"><?php esc_html_e( 'Get This?', 'cmd-analytics-for-cloudflare' ); ?></a>)
 		<?php
 
 	}
@@ -179,10 +179,10 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 		$value = ( isset( $this->plugin_options['domain'] ) ? $this->plugin_options['domain'] : '' );
 
 		?>
-		<select name='<?php echo $this->settings_options; ?>[domain]'>
+		<select name='<?php echo esc_attr( $this->settings_options ); ?>[domain]'>
 		<?php
 		foreach ( $this->domains as $key => $domain ) {
-			?><option value='<?php echo $key; ?>' <?php selected( $value, $key ); ?>><?php echo $domain; ?></option><?php
+			?><option value='<?php echo esc_attr( $key ); ?>' <?php selected( $value, $key ); ?>><?php echo esc_html( $domain ); ?></option><?php
 		}
 		?>
 		</select>
@@ -212,10 +212,10 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 		);
 
 		?>
-		<select name='<?php echo $this->settings_options; ?>[cache_time]'>
+		<select name='<?php echo esc_attr( $this->settings_options ); ?>[cache_time]'>
 		<?php
 		foreach ( $available_options as $key => $time ) {
-			?><option value='<?php echo $key; ?>' <?php selected( $value, $key ); ?>><?php echo $time; ?></option><?php
+			?><option value='<?php echo esc_attr( $key ); ?>' <?php selected( $value, $key ); ?>><?php echo esc_html( $time ); ?></option><?php
 		}
 		?>
 		</select>
@@ -229,7 +229,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 	 * @since    1.0.0
 	 */
 	function admin_error_notice() {
-		echo '<div class="error"><p>' . $this->error_message . '</p></div>';
+		echo '<div class="error"><p>' . esc_html( $this->error_message ) . '</p></div>';
 	}
 
 	/**
@@ -238,7 +238,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 	 * @since    1.0.0
 	 */
 	function admin_success_notice() {
-		echo '<div class="updated"><p>' . $this->error_message . '</p></div>';
+		echo '<div class="updated"><p>' . esc_html( $this->error_message ) . '</p></div>';
 	}
 
 
@@ -249,8 +249,8 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 	 */
 	public function settings_section_callback() {
 
-		echo '<p>' . __( sprintf( 'By %sChuckMac Development%s', '<a href="https://chuckmacdev.com" target="_BLANK">', '</a>' ), 'cmd-analytics-for-cloudflare' ) . '</p>';
-		echo '<p>' . __( 'Please enter your CloudFlare API credentials below.  Once connected you will be able to select the domain for which the site should be linked to.', 'cmd-analytics-for-cloudflare' ) . '</p>';
+		echo '<p>' . wp_kses_post( __( sprintf( 'By %sChuckMac Development%s', '<a href="https://chuckmacdev.com" target="_BLANK">', '</a>' ), 'cmd-analytics-for-cloudflare' ) ) . '</p>';
+		echo '<p>' . esc_html__( 'Please enter your CloudFlare API credentials below.  Once connected you will be able to select the domain for which the site should be linked to.', 'cmd-analytics-for-cloudflare' ) . '</p>';
 
 		do_action( 'cmd_analytics_for_cloudflare_admin_settings_after_desc' );
 
@@ -290,7 +290,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 		?>
 		<form action='options.php' method='post'>
 
-			<h2><?php _e( 'Analytics For Cloudflare', 'cmd-analytics-for-cloudflare' ); ?></h2>
+			<h2><?php esc_html_e( 'Analytics For Cloudflare', 'cmd-analytics-for-cloudflare' ); ?></h2>
 
 			<?php
 			settings_fields( CMD_Analytics_For_Cloudflare::PLUGIN_ID );

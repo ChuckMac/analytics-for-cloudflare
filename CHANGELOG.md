@@ -1,5 +1,10 @@
 # Analytics For Cloudflare
 
+## 1.0.3 - 2016-xx-xx
+### Fixed
+  - Match Wordpress-Extra coding standards.
+  - Fix text domain in i18n (make static instead of variable).
+  
 ## 1.0.2 - 2015-11-26
 ### Added
  - Developer hooks to filter api values
