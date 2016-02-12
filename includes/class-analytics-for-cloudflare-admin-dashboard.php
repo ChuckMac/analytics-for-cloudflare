@@ -136,7 +136,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 		do_action( 'cmd_analytics_for_cloudflare_before_dashboard' );
 
 		// Render the display from the dashboard template file
-		echo esc_html( CMD_Analytics_For_Cloudflare::render_template( 'admin/cmd-afc-dashboard-widget.php',
+		echo CMD_Analytics_For_Cloudflare::render_template( 'admin/cmd-afc-dashboard-widget.php',
 			array(
 				'time_options'    => $time_options,
 				'current_time'    => $current_time,
@@ -144,7 +144,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 				'current_type'    => $current_type,
 				'analytics'       => $analytics,
 			)
-		) );
+		);
 
 		do_action( 'cmd_analytics_for_cloudflare_after_dashboard' );
 	}
