@@ -39,12 +39,12 @@ class CMD_Analytics_For_Cloudflare_Api {
 	 */
 	public function __construct() {
 
-		$options = get_option( CMD_Analytics_For_Cloudflare::PLUGIN_ID . "_settings" );
+		$options = get_option( CMD_Analytics_For_Cloudflare::PLUGIN_ID . '_settings' );
 
 		$this->api_key   = apply_filters( 'cmd_analytics_for_cloudflare_set_api_key', ( isset( $options['api_key'] ) ? $options['api_key'] : null ) );
 		$this->api_email = apply_filters( 'cmd_analytics_for_cloudflare_set_api_email', ( isset( $options['api_email'] ) ? $options['api_email'] : null ) );
 		$this->zone_id   = apply_filters( 'cmd_analytics_for_cloudflare_set_api_domain', ( isset( $options['domain'] ) ? $options['domain'] : null ) );
- 
+
 	}
 
 
@@ -60,13 +60,13 @@ class CMD_Analytics_For_Cloudflare_Api {
 
 		$response = $this->api_call( 'zones' );
 
-		if ( is_wp_error($response) ) {
+		if ( is_wp_error( $response ) ) {
 			return $response;
 		}
 
 		if ( is_array( $response ) ) {
 			foreach ( $response as $zone ) {
-				$domains[$zone->id] = $zone->name;
+				$domains[ $zone->id ] = $zone->name;
 			}
 		}
 
@@ -114,20 +114,20 @@ class CMD_Analytics_For_Cloudflare_Api {
 			return new WP_Error( 'http_request_failed', __( 'API credentials not populated.', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) );
 		}
 
-		$request =	array(
+		$request = array(
 						'timeout' => 15,
-						'headers' =>	array ( 
+						'headers' => array(
 											'X-Auth-Key' => $this->api_key,
 											'X-Auth-Email' => $this->api_email,
-											'Content-Type' => 'application/json'
+											'Content-Type' => 'application/json',
 										),
-						'body' => $data
+						'body' => $data,
 						);
 
-		$response =	wp_remote_get(
-						self::$endpoint_url . $endpoint,
-						$request
-					);
+		$response = wp_remote_get(
+			self::$endpoint_url . $endpoint,
+			$request
+		);
 
 		if ( is_wp_error( $response ) ) {
 			return $response;
@@ -146,12 +146,11 @@ class CMD_Analytics_For_Cloudflare_Api {
 		}
 
 		if ( false === $results->success ) {
-			$message = ( isset ( $results->errors[0]->message ) ? $results->errors[0]->message : __( 'Success flag reported as false in jason response.', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) );
-			$message = ( isset ( $results->errors[0]->error_chain[0]->message ) ? $message . ' - ' . $results->errors[0]->error_chain[0]->message : $message );
+			$message = ( isset( $results->errors[0]->message ) ? $results->errors[0]->message : __( 'Success flag reported as false in jason response.', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) );
+			$message = ( isset( $results->errors[0]->error_chain[0]->message ) ? $message . ' - ' . $results->errors[0]->error_chain[0]->message : $message );
 			return new WP_Error( 'json_request_failed', $message, CMD_Analytics_For_Cloudflare::TEXT_DOMAIN );
 		}
 
 		return $results->result;
 	}
-
 }

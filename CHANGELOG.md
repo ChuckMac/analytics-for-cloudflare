@@ -4,6 +4,9 @@
 ### Added
  - Developer hooks to filter api values
 
+ ### Fixed
+  - Update to WordPress coding standards
+
 ## 1.0.1 - 2015-11-23
 ### Added
  - Link to settings from the plugin page

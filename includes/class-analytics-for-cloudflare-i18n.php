@@ -52,5 +52,4 @@ class CMD_Analytics_For_Cloudflare_i18n {
 	public function set_domain( $domain ) {
 		$this->domain = $domain;
 	}
-
 }

@@ -16,18 +16,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-		
+
 <form id="cmd-analytics-for-cloudflare-dash" method="POST">
 	<select id="<?php echo CMD_Analytics_For_Cloudflare::PLUGIN_ID;?>_dashboard_range" name="<?php echo CMD_Analytics_For_Cloudflare::PLUGIN_ID;?>_dashboard_range" onchange="this.form.submit()">
 		<?php
-		foreach ($time_options as $key => $value) {
+		foreach ( $time_options as $key => $value ) {
 			echo '<option value="' . $key . '"" ' . selected( $current_time, $key ) . '">' . $value . '</option>';
 		}
 		?>
 	</select>
 	<select id="<?php echo CMD_Analytics_For_Cloudflare::PLUGIN_ID;?>_dashboard_type" name="<?php echo CMD_Analytics_For_Cloudflare::PLUGIN_ID;?>_dashboard_type" onchange="this.form.submit()">
 		<?php
-		foreach ($display_options as $key => $value) {
+		foreach ( $display_options as $key => $value ) {
 			echo '<option value="' . $key . '"" ' . selected( $current_type, $key ) . '">' . $value . '</option>';
 		}
 		?>
@@ -36,34 +36,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="cmd-afc-wrapper">
 
-	<h3 class="cmd-acf-heading"><?php echo $display_options[$current_type]; ?> / <?php echo $time_options[$current_time]; ?></h3>
+	<h3 class="cmd-acf-heading"><?php echo $display_options[ $current_type ]; ?> / <?php echo $time_options[ $current_time ]; ?></h3>
 	<canvas id="cmd-acf-linechart" class="line-chart" width="545" height="545"></canvas>
 	<div id="cmd-acf-js-legend" class="chart-legend"></div>
 
 	<div class="inside">
 		<div class="small-box">
-			<h3><?php _e('Total Requests', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN); ?></h3>
-			<p><?php echo ( isset($analytics->totals->requests->all ) ? $analytics->totals->requests->all : '--' ); ?></p>
+			<h3><?php _e( 'Total Requests', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ); ?></h3>
+			<p><?php echo ( isset( $analytics->totals->requests->all ) ? $analytics->totals->requests->all : '--' ); ?></p>
 		</div>
 		<div class="small-box">
-			<h3><?php _e('Total Pageviews', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN); ?></h3>
-			<p><?php echo ( isset($analytics->totals->pageviews->all ) ? $analytics->totals->pageviews->all : '--' ); ?></p>
+			<h3><?php _e( 'Total Pageviews', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ); ?></h3>
+			<p><?php echo ( isset( $analytics->totals->pageviews->all ) ? $analytics->totals->pageviews->all : '--' ); ?></p>
 		</div>
 		<div class="small-box">
-			<h3><?php _e('Total Unique Visitors', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN); ?></h3>
-			<p><?php echo ( isset($analytics->totals->uniques->all ) ? $analytics->totals->uniques->all : '--' ); ?></p>
+			<h3><?php _e( 'Total Unique Visitors', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ); ?></h3>
+			<p><?php echo ( isset( $analytics->totals->uniques->all ) ? $analytics->totals->uniques->all : '--' ); ?></p>
 		</div>
 		<div class="small-box">
-			<h3><?php _e('Threats Detected', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN); ?></h3>
-			<p><?php echo ( isset($analytics->totals->threats->all ) ? $analytics->totals->threats->all : '--' ); ?></p>
+			<h3><?php _e( 'Threats Detected', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ); ?></h3>
+			<p><?php echo ( isset( $analytics->totals->threats->all ) ? $analytics->totals->threats->all : '--' ); ?></p>
 		</div>
 		<div class="small-box">
-			<h3><?php _e('Total Bandwidth', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN); ?></h3>
-			<p><?php echo ( isset($analytics->totals->bandwidth->all ) ? CMD_Analytics_For_Cloudflare_Admin_Dashboard::formatBytes( $analytics->totals->bandwidth->all ) : '--' ); ?></p>
+			<h3><?php _e( 'Total Bandwidth', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ); ?></h3>
+			<p><?php echo ( isset( $analytics->totals->bandwidth->all ) ? CMD_Analytics_For_Cloudflare_Admin_Dashboard::format_bytes( $analytics->totals->bandwidth->all ) : '--' ); ?></p>
 		</div>
 		<div class="small-box">
-			<h3><?php _e('Search Engine Crawls', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN); ?></h3>
-			<p><?php echo ( isset( $analytics->totals->pageviews->search_engine ) ? array_sum( (array)$analytics->totals->pageviews->search_engine ) : '--' ); ?></p>
+			<h3><?php _e( 'Search Engine Crawls', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ); ?></h3>
+			<p><?php echo ( isset( $analytics->totals->pageviews->search_engine ) ? array_sum( (array) $analytics->totals->pageviews->search_engine ) : '--' ); ?></p>
 		</div>
 	</div>
 
