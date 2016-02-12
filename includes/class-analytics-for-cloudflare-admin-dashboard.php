@@ -40,7 +40,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 
 		wp_add_dashboard_widget(
 			CMD_Analytics_For_Cloudflare::PLUGIN_ID . '_dashboard',
-			__( 'Analytics For CloudFlare', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+			__( 'Analytics For CloudFlare', 'cmd-analytics-for-cloudflare' ),
 			array( $this, 'display_dashboard_widget' )
 		);
 
@@ -76,19 +76,19 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 
 		// Available dropdown display items
 		$time_options = array(
-							#'-30'  =>  __('Last 30 minutes', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN),  ## ENTERPRISE PLAN
-							#'-360' => __('Last 6 hours',C MD_Analytics_For_Cloudflare::TEXT_DOMAIN),      ## PRO PLAN
-							#'-720' => __('Last 12 hours', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN),     ## PRO PLAN
-							'-1440'  => __( 'Last 24 hours', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
-							'-10080' => __( 'Last week', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
-							'-43200' => __( 'Last month', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+							#'-30'  =>  __('Last 30 minutes', 'cmd-analytics-for-cloudflare' ),  ## ENTERPRISE PLAN
+							#'-360' => __('Last 6 hours', 'cmd-analytics-for-cloudflare' ),      ## PRO PLAN
+							#'-720' => __('Last 12 hours', 'cmd-analytics-for-cloudflare' ),     ## PRO PLAN
+							'-1440'  => __( 'Last 24 hours', 'cmd-analytics-for-cloudflare' ),
+							'-10080' => __( 'Last week', 'cmd-analytics-for-cloudflare' ),
+							'-43200' => __( 'Last month', 'cmd-analytics-for-cloudflare' ),
 						);
 
 		$display_options = array(
-							'requests'  => __( 'Requests', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
-							'pageviews' => __( 'Pageviews', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
-							'uniques'   => __( 'Unique Visitors', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
-							'bandwidth' => __( 'Bandwidth', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+							'requests'  => __( 'Requests', 'cmd-analytics-for-cloudflare' ),
+							'pageviews' => __( 'Pageviews', 'cmd-analytics-for-cloudflare' ),
+							'uniques'   => __( 'Unique Visitors', 'cmd-analytics-for-cloudflare' ),
+							'bandwidth' => __( 'Bandwidth', 'cmd-analytics-for-cloudflare' ),
 
 						);
 
@@ -119,9 +119,9 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 
 			//If we encounter an error, show it and don't cache
 			if ( is_wp_error( $analytics ) ) {
-				echo '<h3 class=>' . __( 'Unable to connect to CloudFlare', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) . '</h3>';
+				echo '<h3 class=>' . __( 'Unable to connect to CloudFlare', 'cmd-analytics-for-cloudflare' ) . '</h3>';
 				echo '<p>' . $analytics->get_error_message(); '</p>';
-				echo '<p>' . __( sprintf( 'View the %sCloudFlare For Analytics settings%s', '<a href="' . admin_url( 'options-general.php?page=cmd_analytics_for_cloudflare' ) . '">', '</a>' ), CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) . '</p>';
+				echo '<p>' . __( sprintf( 'View the %sCloudFlare For Analytics settings%s', '<a href="' . admin_url( 'options-general.php?page=cmd_analytics_for_cloudflare' ) . '">', '</a>' ), 'cmd-analytics-for-cloudflare' ) . '</p>';
 				return;
 			}
 
@@ -162,14 +162,14 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 				'value'     => $analytics->totals->bandwidth->cached,
 				'color'     => '#F68B1F',
 				'highlight' => '#F4690C',
-				'label'     => __( 'Cached', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+				'label'     => __( 'Cached', 'cmd-analytics-for-cloudflare' ),
 				'display'   => $this->format_bytes( $analytics->totals->bandwidth->cached ),
 			),
 			'1' => array(
 				'value'     => $analytics->totals->bandwidth->uncached,
 				'color'     => '#A9A9A9',
 				'highlight' => '#8F9CA8',
-				'label'     => __( 'Uncached', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+				'label'     => __( 'Uncached', 'cmd-analytics-for-cloudflare' ),
 				'display'   => $this->format_bytes( $analytics->totals->bandwidth->uncached ),
 			),
 		);
@@ -179,13 +179,13 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 				'value'     => $analytics->totals->requests->ssl->encrypted,
 				'color'     => '#F68B1F',
 				'highlight' => '#F4690C',
-				'label'     => __( 'Encypted', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+				'label'     => __( 'Encypted', 'cmd-analytics-for-cloudflare' ),
 			),
 			'1' => array(
 				'value'     => $analytics->totals->requests->ssl->unencrypted,
 				'color'     => '#A9A9A9',
 				'highlight' => '#8F9CA8',
-				'label'     => __( 'Unencrypted', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+				'label'     => __( 'Unencrypted', 'cmd-analytics-for-cloudflare' ),
 			),
 		);
 
@@ -240,7 +240,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 				'pointHighlightStroke' => 'rgba(220,220,220,1)',
 			);
 			$interval_chart['datasets'][1] = array(
-				'label' => __( 'Cached', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+				'label' => __( 'Cached', 'cmd-analytics-for-cloudflare' ),
 				'fillColor' => 'rgba(246,139,31,0.2)',
 				'strokeColor' => 'rgba(234,101,0,1)',
 				'scaleFontSize' => '0',
@@ -250,7 +250,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 				'pointHighlightStroke' => 'rgba(220,220,220,1)',
 			);
 			$interval_chart['datasets'][2] = array(
-				'label' => __( 'Uncached', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+				'label' => __( 'Uncached', 'cmd-analytics-for-cloudflare' ),
 				'fillColor' => 'rgba(129,129,129,0.2)',
 				'strokeColor' => 'rgba(143,156,168,1)',
 				'scaleFontSize' => '0',
@@ -261,7 +261,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 			);
 		} else {
 			$interval_chart['datasets'][0] = array(
-				'label' => __( 'Pageviews', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+				'label' => __( 'Pageviews', 'cmd-analytics-for-cloudflare' ),
 				'fillColor' => 'rgba(246,139,31,0.2)',
 				'strokeColor' => 'rgba(234,101,0,1)',
 				'scaleFontSize' => '0',

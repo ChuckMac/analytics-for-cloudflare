@@ -62,8 +62,8 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 	public function add_admin_menu() {
 
 		add_options_page(
-			__( 'Analytics For CloudFlare', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
-			__( 'Analytics For CloudFlare', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+			__( 'Analytics For CloudFlare', 'cmd-analytics-for-cloudflare' ),
+			__( 'Analytics For CloudFlare', 'cmd-analytics-for-cloudflare' ),
 			'manage_options',
 			CMD_Analytics_For_Cloudflare::PLUGIN_ID,
 			array( $this, 'display_options_page' )
@@ -103,7 +103,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 
 		add_settings_field(
 			$this->settings_group . '_api_key',
-			__( 'CloudFlare API Key', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+			__( 'CloudFlare API Key', 'cmd-analytics-for-cloudflare' ),
 			array( $this, 'cmd_analytics_for_cloudflare_api_key_render' ),
 			CMD_Analytics_For_Cloudflare::TEXT_DOMAIN,
 			$this->settings_group
@@ -111,7 +111,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 
 		add_settings_field(
 			$this->settings_group . '_api_email',
-			__( 'CloudFlare Email Address', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+			__( 'CloudFlare Email Address', 'cmd-analytics-for-cloudflare' ),
 			array( $this, 'cmd_analytics_for_cloudflare_api_email_render' ),
 			CMD_Analytics_For_Cloudflare::TEXT_DOMAIN,
 			$this->settings_group
@@ -120,7 +120,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 		if ( true === $this->is_connected ) {
 			add_settings_field(
 				$this->settings_group . '_domain',
-				__( 'CloudFlare Domain', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+				__( 'CloudFlare Domain', 'cmd-analytics-for-cloudflare' ),
 				array( $this, 'cmd_analytics_for_cloudflare_domain_render' ),
 				CMD_Analytics_For_Cloudflare::TEXT_DOMAIN,
 				$this->settings_group
@@ -128,7 +128,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 
 			add_settings_field(
 				$this->settings_group . '_cache_time',
-				__( 'Cache Results For', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+				__( 'Cache Results For', 'cmd-analytics-for-cloudflare' ),
 				array( $this, 'cmd_analytics_for_cloudflare_cache_time_render' ),
 				CMD_Analytics_For_Cloudflare::TEXT_DOMAIN,
 				$this->settings_group
@@ -148,7 +148,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 
 		?>
 		<input type='text' size="50" maxlength="48" name='<?php echo $this->settings_options; ?>[api_key]' value='<?php echo $value; ?>'>
-		(<a href="https://www.cloudflare.com/my-websites"><?php _e( 'Get This?', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ); ?></a>)
+		(<a href="https://www.cloudflare.com/my-websites"><?php _e( 'Get This?', 'cmd-analytics-for-cloudflare' ); ?></a>)
 		<?php
 
 	}
@@ -164,7 +164,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 
 		?>
 		<input type='text' size="50" maxlength="100" name='<?php echo $this->settings_options; ?>[api_email]' value='<?php echo $value; ?>'>
-		(<a href="https://www.cloudflare.com/my-account.html"><?php _e( 'Get This?', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ); ?></a>)
+		(<a href="https://www.cloudflare.com/my-account.html"><?php _e( 'Get This?', 'cmd-analytics-for-cloudflare' ); ?></a>)
 		<?php
 
 	}
@@ -202,12 +202,12 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 		$available_options = apply_filters(
 			'cmd_analytics_for_cloudflare_admin_settings_cache_options',
 			array(
-				'0'     => __( 'Do Not Cache', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
-				'300'   => __( '5 Minutes', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
-				'900'   => __( '15 Minutes', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
-				'3600'  => __( '1 Hour', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
-				'10400' => __( '4 Hours', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
-				'55200' => __( '12 Hours', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ),
+				'0'     => __( 'Do Not Cache', 'cmd-analytics-for-cloudflare' ),
+				'300'   => __( '5 Minutes', 'cmd-analytics-for-cloudflare' ),
+				'900'   => __( '15 Minutes', 'cmd-analytics-for-cloudflare' ),
+				'3600'  => __( '1 Hour', 'cmd-analytics-for-cloudflare' ),
+				'10400' => __( '4 Hours', 'cmd-analytics-for-cloudflare' ),
+				'55200' => __( '12 Hours', 'cmd-analytics-for-cloudflare' ),
 			)
 		);
 
@@ -249,8 +249,8 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 	 */
 	public function settings_section_callback() {
 
-		echo '<p>' . __( sprintf( 'By %sChuckMac Development%s', '<a href="https://chuckmacdev.com" target="_BLANK">', '</a>' ), CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) . '</p>';
-		echo '<p>' . __( 'Please enter your CloudFlare API credentials below.  Once connected you will be able to select the domain for which the site should be linked to.', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) . '</p>';
+		echo '<p>' . __( sprintf( 'By %sChuckMac Development%s', '<a href="https://chuckmacdev.com" target="_BLANK">', '</a>' ), 'cmd-analytics-for-cloudflare' ) . '</p>';
+		echo '<p>' . __( 'Please enter your CloudFlare API credentials below.  Once connected you will be able to select the domain for which the site should be linked to.', 'cmd-analytics-for-cloudflare' ) . '</p>';
 
 		do_action( 'cmd_analytics_for_cloudflare_admin_settings_after_desc' );
 
@@ -270,11 +270,11 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 		$this->domains = $cloudflare->get_domains();
 
 		if ( is_wp_error( $this->domains ) ) {
-			$this->error_message = __( 'Unable to connect to CloudFlare :: ', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) . $this->domains->get_error_message();
+			$this->error_message = __( 'Unable to connect to CloudFlare :: ', 'cmd-analytics-for-cloudflare' ) . $this->domains->get_error_message();
 			add_action( 'cmd_analytics_for_cloudflare_admin_settings_after_desc', array( $this, 'admin_error_notice' ) );
 		} else {
 			$this->is_connected = true;
-			$this->error_message = __( 'Successfully connected to CloudFlare! ', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN );
+			$this->error_message = __( 'Successfully connected to CloudFlare! ', 'cmd-analytics-for-cloudflare' );
 			add_action( 'cmd_analytics_for_cloudflare_admin_settings_after_desc', array( $this, 'admin_success_notice' ) );
 		}
 
@@ -290,7 +290,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 		?>
 		<form action='options.php' method='post'>
 
-			<h2><?php _e( 'Analytics For Cloudflare', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ); ?></h2>
+			<h2><?php _e( 'Analytics For Cloudflare', 'cmd-analytics-for-cloudflare' ); ?></h2>
 
 			<?php
 			settings_fields( CMD_Analytics_For_Cloudflare::PLUGIN_ID );
@@ -334,7 +334,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Settings {
 	 */
 	public function plugin_settings_link( $actions, $plugin_file, $plugin_data, $context ) {
 
-		$setting_link = '<a href="' . esc_url( get_admin_url( null, 'options-general.php?page=' . CMD_Analytics_For_Cloudflare::PLUGIN_ID ) ) . '">' . __( 'Settings', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) . '</a>';
+		$setting_link = '<a href="' . esc_url( get_admin_url( null, 'options-general.php?page=' . CMD_Analytics_For_Cloudflare::PLUGIN_ID ) ) . '">' . __( 'Settings', 'cmd-analytics-for-cloudflare' ) . '</a>';
 
 		return array_merge( array( 'settings' => $setting_link ), $actions );
 	}

@@ -90,7 +90,7 @@ class CMD_Analytics_For_Cloudflare_Api {
 	public function get_analytics( $args = array() ) {
 
 		if ( empty( $this->zone_id ) ) {
-			return new WP_Error( 'http_request_failed', __( 'Domain not selected in settings.', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) );
+			return new WP_Error( 'http_request_failed', __( 'Domain not selected in settings.', 'cmd-analytics-for-cloudflare' ) );
 		}
 
 		$response = $this->api_call( 'zones/' . $this->zone_id . '/analytics/dashboard?' . http_build_query( $args ) );
@@ -111,7 +111,7 @@ class CMD_Analytics_For_Cloudflare_Api {
 	public function api_call( $endpoint, $data = null ) {
 
 		if ( empty( $this->api_key ) || empty( $this->api_email ) ) {
-			return new WP_Error( 'http_request_failed', __( 'API credentials not populated.', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) );
+			return new WP_Error( 'http_request_failed', __( 'API credentials not populated.', 'cmd-analytics-for-cloudflare' ) );
 		}
 
 		$request = array(
@@ -136,17 +136,17 @@ class CMD_Analytics_For_Cloudflare_Api {
 		do_action( 'cmd_analytics_for_cloudflare_api_after_call', $response, $endpoint, $request );
 
 		if ( ( ! is_array( $response ) ) || ( ! isset( $response['body'] ) ) ) {
-			return new WP_Error( 'http_request_failed', __( 'Unable to parse response data.', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) );
+			return new WP_Error( 'http_request_failed', __( 'Unable to parse response data.', 'cmd-analytics-for-cloudflare' ) );
 		}
 
 		$results = apply_filters( 'cmd_analytics_for_cloudflare_api_json_data', json_decode( $response['body'] ) );
 
 		if ( ! isset( $results->success ) ) {
-			return new WP_Error( 'json_request_failed', __( 'Success flag not found in json response.', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) );
+			return new WP_Error( 'json_request_failed', __( 'Success flag not found in json response.', 'cmd-analytics-for-cloudflare' ) );
 		}
 
 		if ( false === $results->success ) {
-			$message = ( isset( $results->errors[0]->message ) ? $results->errors[0]->message : __( 'Success flag reported as false in jason response.', CMD_Analytics_For_Cloudflare::TEXT_DOMAIN ) );
+			$message = ( isset( $results->errors[0]->message ) ? $results->errors[0]->message : __( 'Success flag reported as false in jason response.', 'cmd-analytics-for-cloudflare' ) );
 			$message = ( isset( $results->errors[0]->error_chain[0]->message ) ? $message . ' - ' . $results->errors[0]->error_chain[0]->message : $message );
 			return new WP_Error( 'json_request_failed', $message, CMD_Analytics_For_Cloudflare::TEXT_DOMAIN );
 		}

@@ -82,7 +82,7 @@ class CMD_Analytics_For_Cloudflare {
 	private function set_locale() {
 		require_once( 'class-analytics-for-cloudflare-i18n.php' );
 		$plugin_i18n = new CMD_Analytics_For_Cloudflare_i18n();
-		$plugin_i18n->set_domain( CMD_Analytics_For_Cloudflare::TEXT_DOMAIN );
+		$plugin_i18n->set_domain( 'cmd-analytics-for-cloudflare' );
 		add_action( 'plugins_loaded', array( $plugin_i18n, 'load_plugin_textdomain' ) );
 	}
 

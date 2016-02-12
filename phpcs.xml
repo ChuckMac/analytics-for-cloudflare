@@ -4,5 +4,5 @@
 
  <exclude-pattern>*/tests/*</exclude-pattern>
 
- <rule ref="WordPress-Core" />
+ <rule ref="WordPress-Extra" />
 </ruleset>
