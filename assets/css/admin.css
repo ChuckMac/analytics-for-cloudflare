@@ -31,7 +31,7 @@
 	margin: 0px 0px 0px 0px;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	white-space: nowrap;	
+	white-space: nowrap;
 }
 
 .cmd-afc-wrapper .inside .small-box p {
@@ -86,6 +86,11 @@
     height: 12px;
     margin-right: 5px;
 }
+
+#dashboard-widgets .cmd-afc-wrapper .small-box h3 {
+	font-size: 11px;
+}
+
 
 @media screen and (max-width: 410px) {
 	.cmd-afc-wrapper .inside .small-box {
