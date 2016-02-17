@@ -96,6 +96,13 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 		$current_time = '-10080';
 		$current_type = 'pageviews';
 
+		// Check to see if the user already has a view setup, if not use defaults - last week / requests
+		$user_id = ( isset( $_REQUEST['cmd_analytics_for_cloudflare_current_user'] ) ) ? $_REQUEST['cmd_analytics_for_cloudflare_current_user'] : get_current_user_id();
+		$user_view = get_user_meta( $user_id, '_cmd_analytics_for_cloudflare_view', true );
+
+		$current_time = ( isset( $user_view['current_time'] ) ) ? $user_view['current_time'] : '-10080';
+		$current_type = ( isset( $user_view['current_type'] ) ) ? $user_view['current_type'] : '-pageviews';
+
 		$this->plugin_options = get_option( CMD_Analytics_For_Cloudflare::PLUGIN_ID . '_settings' );
 
 		//Check if the form was submitted to change the view
@@ -105,6 +112,9 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 		if ( ( isset( $_REQUEST['cmd_analytics_for_cloudflare_dashboard_type'] ) ) && ( array_key_exists( $_REQUEST['cmd_analytics_for_cloudflare_dashboard_type'], $display_options ) ) ) {
 			$current_type = $_REQUEST['cmd_analytics_for_cloudflare_dashboard_type'];
 		}
+
+		// Save current user view
+		update_user_meta( $user_id, '_cmd_analytics_for_cloudflare_view', array( 'current_time' => $current_time, 'current_type' => $current_type ) );
 
 		//Set our caching options
 		$options = get_option( CMD_Analytics_For_Cloudflare::PLUGIN_ID . '_settings' );
@@ -290,6 +300,13 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 			}
 		}
 
+		$ajax = array(
+			'ajax_url'      => admin_url( 'admin-ajax.php' ),
+			'ajax_nonce'    => wp_create_nonce( 'cmd_afc_nonce' ),
+			'cmd_plugin_id' => CMD_Analytics_For_Cloudflare::PLUGIN_ID,
+			'current_user'  => get_current_user_id(),
+		);
+
 		// Register and localize all the script data
 		wp_register_script( CMD_Analytics_For_Cloudflare::TEXT_DOMAIN . '-js', plugins_url( 'assets/js/admin.js' , dirname( __FILE__ ) ), array( 'jquery' ), CMD_Analytics_For_Cloudflare::VERSION, true );
 
@@ -299,6 +316,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 		wp_localize_script( CMD_Analytics_For_Cloudflare::TEXT_DOMAIN . '-js', 'cmd_afc_content_types', $content_types );
 		wp_localize_script( CMD_Analytics_For_Cloudflare::TEXT_DOMAIN . '-js', 'cmd_afc_countries', $countries );
 		wp_localize_script( CMD_Analytics_For_Cloudflare::TEXT_DOMAIN . '-js', 'cmd_afc_current_type', $current_type );
+		wp_localize_script( CMD_Analytics_For_Cloudflare::TEXT_DOMAIN . '-js', 'cmd_afc_ajax', $ajax );
 
 		wp_enqueue_script( CMD_Analytics_For_Cloudflare::TEXT_DOMAIN . '-js' );
 
