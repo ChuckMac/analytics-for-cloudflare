@@ -286,9 +286,9 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 
 			// Set the date format for the chart (hours or dates)
 			if ( '-1440' === $current_time ) {
-				$interval_chart['labels'][] = apply_filters( 'cmd_analytics_for_cloudflare_interval_dateformat', date( 'ga', strtotime( $interval->since ) ), $interval->since, $current_time );
+				$interval_chart['labels'][] = apply_filters( 'cmd_analytics_for_cloudflare_interval_dateformat', get_date_from_gmt( date( 'Y-m-d H:i:s', strtotime( $interval->since ) ), 'ga' ), $interval->since, $current_time );
 			} else {
-				$interval_chart['labels'][] = apply_filters( 'cmd_analytics_for_cloudflare_interval_dateformat', date( 'm/d', strtotime( $interval->since ) ), $interval->since, $current_time );
+				$interval_chart['labels'][] = apply_filters( 'cmd_analytics_for_cloudflare_interval_dateformat', get_date_from_gmt( date( 'Y-m-d H:i:s', strtotime( $interval->since ) ), 'm/d' ), $interval->since, $current_time );
 			}
 
 			if ( ( 'requests' === $current_type ) || ( 'bandwidth' === $current_type ) ) {
