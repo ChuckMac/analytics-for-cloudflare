@@ -58,16 +58,29 @@ class CMD_Analytics_For_Cloudflare_Api {
 
 		$domains = array();
 
-		$response = $this->api_call( 'zones' );
+		$finished = false;
+		$current_page = 1;
 
-		if ( is_wp_error( $response ) ) {
-			return $response;
-		}
+		while ( ! $finished ) {
 
-		if ( is_array( $response ) ) {
-			foreach ( $response as $zone ) {
-				$domains[ $zone->id ] = $zone->name;
+			$response = $this->api_call( 'zones?' . http_build_query( array( 'per_page' => '20', 'page' => $current_page ) ) );
+
+			if ( is_wp_error( $response ) ) {
+				return $response;
 			}
+
+			if ( is_array( $response->result ) ) {
+				foreach ( $response->result as $zone ) {
+					$domains[ $zone->id ] = $zone->name;
+				}
+			}
+
+			if ( $current_page === $response->result_info->total_pages ) {
+				$finished = true;
+			}
+
+			$current_page++;
+
 		}
 
 		do_action( 'cmd_analytics_for_cloudflare_api_get_domains', $domains, $response );
@@ -95,7 +108,13 @@ class CMD_Analytics_For_Cloudflare_Api {
 
 		$response = $this->api_call( 'zones/' . $this->zone_id . '/analytics/dashboard?' . http_build_query( $args ) );
 
-		return $response;
+		if ( is_wp_error( $response ) ) {
+			return $response;
+		} elseif ( isset( $response->result ) ) {
+			return $response->result;
+		} else {
+			return false;
+		}
 
 	}
 
@@ -151,6 +170,6 @@ class CMD_Analytics_For_Cloudflare_Api {
 			return new WP_Error( 'json_request_failed', $message, CMD_Analytics_For_Cloudflare::TEXT_DOMAIN );
 		}
 
-		return $results->result;
+		return $results;
 	}
 }

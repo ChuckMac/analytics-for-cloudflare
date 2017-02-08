@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class CMD_Analytics_For_Cloudflare {
 
 	/** plugin version number */
-	const VERSION = '1.0.0';
+	const VERSION = '1.1';
 
 	/** plugin id */
 	const PLUGIN_ID = 'cmd_analytics_for_cloudflare';
@@ -102,7 +102,7 @@ class CMD_Analytics_For_Cloudflare {
 	public static function render_template( $default_template_path, $variables = array(), $require = 'once' ) {
 		$template_path = locate_template( basename( $default_template_path ) );
 		if ( ! $template_path ) {
-			$template_path = dirname( __DIR__ ) . '/templates/' . $default_template_path;
+			$template_path = dirname( self::$base_file ) . '/templates/' . $default_template_path;
 		}
 		$template_path = apply_filters( CMD_Analytics_For_Cloudflare::PLUGIN_ID . '_template_path', $template_path );
 

@@ -89,7 +89,6 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 							'pageviews' => __( 'Pageviews', 'cmd-analytics-for-cloudflare' ),
 							'uniques'   => __( 'Unique Visitors', 'cmd-analytics-for-cloudflare' ),
 							'bandwidth' => __( 'Bandwidth', 'cmd-analytics-for-cloudflare' ),
-
 						);
 
 		//Default - last week / requests
@@ -101,7 +100,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 		$user_view = get_user_meta( $user_id, '_cmd_analytics_for_cloudflare_view', true );
 
 		$current_time = ( isset( $user_view['current_time'] ) ) ? $user_view['current_time'] : '-10080';
-		$current_type = ( isset( $user_view['current_type'] ) ) ? $user_view['current_type'] : '-pageviews';
+		$current_type = ( isset( $user_view['current_type'] ) ) ? $user_view['current_type'] : 'pageviews';
 
 		$this->plugin_options = get_option( CMD_Analytics_For_Cloudflare::PLUGIN_ID . '_settings' );
 
@@ -121,7 +120,7 @@ class CMD_Analytics_For_Cloudflare_Admin_Dashboard {
 		$cache_time = ( isset( $this->plugin_options['cache_time'] ) ? $this->plugin_options['cache_time'] : '900' );
 
 		//Check our transiant for the analytics object for our current view, if not found then pull the data
-		if ( 0 === $cache_time || false === ( $analytics = get_transient( 'cmd_afc_results_' . $current_time . '_' . $current_type ) ) ) {
+		if ( '0' === $cache_time || false === ( $analytics = get_transient( 'cmd_afc_results_' . $current_time . '_' . $current_type ) ) ) {
 
 			require_once( 'class-analytics-for-cloudflare-api.php' );
 			$cloudflare = new CMD_Analytics_For_Cloudflare_Api();

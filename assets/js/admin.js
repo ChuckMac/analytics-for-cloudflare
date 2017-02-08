@@ -6,7 +6,7 @@ jQuery(document).ready(function($){
 		animation: false,
 		tooltipTemplate : function(data) {
 			return data.label + ': ' + get_bw_formatted_value(data);
-		} 
+		}
 	} );
 
 	// Initialize the ssl doughnut chart
@@ -52,7 +52,7 @@ jQuery(document).ready(function($){
 		maintainAspectRatio: false,
 		scaleBeginAtZero: true,
 		bezierCurve : false,
-		scaleLabel: function(data) {	
+		scaleLabel: function(data) {
 				// Format the bandwidth label to MB
 				if ( 'bandwidth' === cmd_afc_current_type ) {
 					return ( ( data.value/1024 )/1024 ).toFixed(1) + 'MB';
@@ -67,7 +67,7 @@ jQuery(document).ready(function($){
 				} else {
 					return data.datasetLabel + ': ' + data.value;
 				}
-		} 
+		}
 	});
 
 	// Create the chart legend
@@ -90,7 +90,6 @@ jQuery(document).ready(function($){
 		if ( 0 === bytes ) {
 			return '0 Byte';
 		}
-		console.log(bytes);
 		var i = parseInt( Math.floor( Math.log(bytes) / Math.log(1024) ) );
 		return ( bytes / Math.pow(1024, i) ).toFixed(2) + ' ' + sizes[i];
 	}
