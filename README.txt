@@ -48,6 +48,11 @@ You can also get a quick look at some other metics available.
 
 == Changelog ==
 
+= 1.1 =
+* Match Wordpress-Extra coding standards.
+* Fix text domain in i18n (make static instead of variable).
+* Fix domains not appearing properly if you have more than 20
+
 = 1.0.2 =
 * Added: Developer hooks to filter api values
 

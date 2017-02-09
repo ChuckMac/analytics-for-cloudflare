@@ -1,10 +1,10 @@
 # Analytics For Cloudflare
 
-## 1.0.3 - 2016-xx-xx
+## 1.1 - 2017-02-09
 ### Fixed
   - Match Wordpress-Extra coding standards.
   - Fix text domain in i18n (make static instead of variable).
-	- Fix domains not appearing properly if you have more than 20
+  - Fix domains not appearing properly if you have more than 20
 
 ## 1.0.2 - 2015-11-26
 ### Added
